@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\MylistController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
 use App\Models\Mylist;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MylistController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('home');

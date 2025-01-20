@@ -20,7 +20,10 @@ Route::get('/create-new-list', function () {
 
 //View the My Lists page if logged in
 Route::get('/my-lists', function () {
-    $lists = Mylist::all();
+    $lists = [];
+    if (auth()->check()) {
+        $lists = auth()->user()->usersCoolLists()->latest()->get();
+    }
     return view('my-lists', ['lists' => $lists]);
 })->middleware(['auth', 'verified'])->name('my-lists');
 
@@ -33,4 +36,4 @@ Route::middleware('auth')->group(function () {
 // Create a new list form
 Route::post('create-mylist', [MylistController::class, 'createMylist']);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

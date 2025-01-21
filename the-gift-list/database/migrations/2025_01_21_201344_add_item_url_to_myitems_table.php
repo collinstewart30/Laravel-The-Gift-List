@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mylists', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->longText('description');
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->timestamps();
+        Schema::table('myitems', function (Blueprint $table) {
+            $table->string('item_url');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mylists');
+        Schema::table('myitems', function (Blueprint $table) {
+            //
+        });
     }
 };

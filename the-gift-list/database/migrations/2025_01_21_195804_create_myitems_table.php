@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mylists', function (Blueprint $table) {
+        Schema::create('myitems', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->longText('description');
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->boolean('is_completed')->default(false);
+            $table->foreignId('list_id')->references('id')->on('mylists');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mylists');
+        Schema::dropIfExists('myitems');
     }
 };

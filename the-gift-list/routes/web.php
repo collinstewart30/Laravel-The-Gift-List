@@ -34,7 +34,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Create a new list form
+// List Related Routes
 Route::post('create-mylist', [MylistController::class, 'createMylist']);
+Route::get('/edit-list/{list}', [MylistController::class, 'showEditScreen']);
+Route::put('/edit-list/{list}', [MylistController::class, 'updateList']);
 
 require __DIR__ . '/auth.php';

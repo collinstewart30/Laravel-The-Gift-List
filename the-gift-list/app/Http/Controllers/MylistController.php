@@ -34,7 +34,10 @@ class MylistController extends Controller
             return redirect('/dashboard');
         }
 
-        return view('edit-list', ['list' => $list]);
+        // Fetch all items associated with the current list
+        $items = $list->listsCurrentItems()->get(); // Using the relationship method
+
+        return view('edit-list', ['list' => $list, 'items' => $items]);
     }
 
     public function createMylist(Request $request)

@@ -11,4 +11,8 @@ class Mylist extends Model
         'description',
         'user_id'
     ];
+
+    public function listsCurrentItems() {
+        return $this->hasMany(Myitem::class, 'list_id');
+    }
 }

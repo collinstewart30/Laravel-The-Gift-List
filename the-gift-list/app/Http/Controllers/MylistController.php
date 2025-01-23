@@ -21,6 +21,15 @@ class MylistController extends Controller
         return redirect('/my-lists');
     }
 
+    public function deleteItem(Mylist $list, Myitem $item) {
+        if (auth()->user()->id === $list['user_id'] && $item->list_id === $list->id) {
+            // Delete current items associated with the list
+            $item->delete();
+        }
+
+        return redirect("/edit-list/{$list->id}");
+    }
+
     public function updateList(Mylist $list, Request $request) {
         if (auth()->user()->id !== $list['user_id']) {
             return redirect('/dashboard');

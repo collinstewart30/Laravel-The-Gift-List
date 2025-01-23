@@ -37,33 +37,35 @@
         </div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-2">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mt-2">
-                <div class="p-3 text-gray-900 dark:text-gray-100 flex flex-row">
-                    <div class="mt-8">
-                        <h3 class="font-semibold text-lg">Items in this List</h3>
-
-                        @if ($items->isEmpty())
-                            <p>No items have been added to this list yet.</p>
-                        @else
-                            <ul>
-                                @foreach ($items as $item)
-                                    <li class="mt-2">
-                                        <strong>{{ $item->name }}</strong><br>
-                                        <a href="{{ $item->item_url }}" class="text-blue-500"
-                                            target="_blank">{{ $item->item_url }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </div>
-
+                <div class="p-3 text-gray-900 dark:text-gray-100 flex flex-col">
+                    @if ($items->isEmpty())
+                        <p>No items have been added to this list yet.</p>
+                    @else
+                        <h3 class="font-semibold text-lg mb-2">Items in {{ $list->name }}</h3>
+                        <ul>
+                            @foreach ($items as $item)
+                                <li class="mt-2 ml-5 list-disc">
+                                    <strong>{{ $item->name }}</strong><br>
+                                    <a href="{{ $item->item_url }}" class="text-blue-500"
+                                        target="_blank">{{ $item->item_url }}</a>
+                                    <div>
+                                        <form action="/delete-item/{{ $list->id }}/{{ $item->id }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button>Delete</button>
+                                        </form>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
                 </div>
             </div>
         </div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-2">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <p>*TODO: Output items here with form to add item to list</p>
-
+                    <h3 class="font-semibold text-lg mb-4">Add a New Item</h3>
                     <form method="POST" action="/add-new-item/{{ $list->id }}">
                         @csrf
 
@@ -87,7 +89,6 @@
                             </x-primary-button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

@@ -42,5 +42,6 @@ Route::delete('/delete-list/{list}', [MylistController::class, 'deleteList']);
 
 //Item Related Routes
 Route::post('add-new-item/{list}', [MylistController::class, 'addItemToList']);
+Route::delete('/delete-item/{list}/{item}', [MylistController::class, 'deleteItem']);
 
 require __DIR__ . '/auth.php';

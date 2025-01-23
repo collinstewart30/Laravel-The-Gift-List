@@ -10,6 +10,17 @@ use Illuminate\Support\Facades\DB;
 class MylistController extends Controller
 {
 
+    public function deleteList(Mylist $list) {
+        if (auth()->user()->id === $list['user_id']) {
+            // Delete all items associated with the list
+            $list->items()->delete();
+            // Delete the list itself
+            $list->delete();
+        }
+
+        return redirect('/my-lists');
+    }
+
     public function updateList(Mylist $list, Request $request) {
         if (auth()->user()->id !== $list['user_id']) {
             return redirect('/dashboard');
@@ -26,7 +37,7 @@ class MylistController extends Controller
 
         //Update in database
         $list->update($incomingFields);
-        return redirect('my-lists');
+        return redirect('/my-lists');
     }
 
     public function showEditScreen(Mylist $list) {
@@ -35,7 +46,7 @@ class MylistController extends Controller
         }
 
         // Fetch all items associated with the current list
-        $items = $list->listsCurrentItems()->get(); // Using the relationship method
+        $items = $list->items()->get(); // Using the relationship method
 
         return view('edit-list', ['list' => $list, 'items' => $items]);
     }

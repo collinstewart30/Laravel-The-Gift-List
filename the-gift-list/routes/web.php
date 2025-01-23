@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
 Route::post('create-mylist', [MylistController::class, 'createMylist']);
 Route::get('/edit-list/{list}', [MylistController::class, 'showEditScreen']);
 Route::put('/edit-list/{list}', [MylistController::class, 'updateList']);
+Route::delete('/delete-list/{list}', [MylistController::class, 'deleteList']);
 
 //Item Related Routes
 Route::post('add-new-item/{list}', [MylistController::class, 'addItemToList']);

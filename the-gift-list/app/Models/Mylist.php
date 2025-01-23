@@ -12,7 +12,7 @@ class Mylist extends Model
         'user_id'
     ];
 
-    public function listsCurrentItems() {
+    public function items() {
         return $this->hasMany(Myitem::class, 'list_id');
     }
 }

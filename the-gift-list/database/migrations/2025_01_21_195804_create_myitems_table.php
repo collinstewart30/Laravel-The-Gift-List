@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('myitems', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('item_url');
             $table->boolean('is_completed')->default(false);
-            $table->foreignId('list_id')->references('id')->on('mylists');
+            $table->unsignedInteger('list_id')->nullable();
             $table->timestamps();
+        });
+        Schema::table('myitems', function (Blueprint $table) {
+            $table->foreign('list_id')->references('id')->on('mylists');
         });
     }
 

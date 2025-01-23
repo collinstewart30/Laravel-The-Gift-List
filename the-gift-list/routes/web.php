@@ -39,4 +39,7 @@ Route::post('create-mylist', [MylistController::class, 'createMylist']);
 Route::get('/edit-list/{list}', [MylistController::class, 'showEditScreen']);
 Route::put('/edit-list/{list}', [MylistController::class, 'updateList']);
 
+//Item Related Routes
+Route::post('add-new-item/{list}', [MylistController::class, 'addItemToList']);
+
 require __DIR__ . '/auth.php';

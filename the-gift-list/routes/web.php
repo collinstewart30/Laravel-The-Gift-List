@@ -1,8 +1,9 @@
 <?php
 
 use App\Models\Mylist;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MyitemController;
 use App\Http\Controllers\MylistController;
 use App\Http\Controllers\ProfileController;
 
@@ -41,7 +42,7 @@ Route::put('/edit-list/{list}', [MylistController::class, 'updateList']);
 Route::delete('/delete-list/{list}', [MylistController::class, 'deleteList']);
 
 //Item Related Routes
-Route::post('add-new-item/{list}', [MylistController::class, 'addItemToList']);
-Route::delete('/delete-item/{list}/{item}', [MylistController::class, 'deleteItem']);
+Route::post('add-new-item/{list}', [MyitemController::class, 'addItemToList']);
+Route::delete('/delete-item/{list}/{item}', [MyitemController::class, 'deleteItem']);
 
 require __DIR__ . '/auth.php';
